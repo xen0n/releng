@@ -92,15 +92,12 @@ livecd/packages:
 	sys-fs/jfsutils
 	sys-fs/lsscsi
 	sys-fs/lvm2
-	sys-fs/mac-fdisk
 	sys-fs/mdadm
 	sys-fs/multipath-tools
 	sys-fs/ntfs3g
 	sys-fs/reiserfsprogs
 	sys-fs/xfsprogs
 	sys-kernel/linux-firmware
-	#force rebuild for USE="(-multilib*)"
-	sys-libs/glibc
 	sys-libs/gpm
 	sys-power/acpid
 	www-client/links
