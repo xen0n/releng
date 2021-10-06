@@ -1,18 +1,18 @@
 subarch: loong
-version_stamp: 20211001
+version_stamp: 20211005
 target: livecd-stage2
 rel_type: default
 profile: loongson:desktop/3a5000
-snapshot: 20211001
-source_subpath: default/livecd-stage1-loong-20211001
+snapshot: 20211005
+source_subpath: default/livecd-stage1-loong-20211005
 portage_confdir: /opt/releng/releases/portage/isos
 portage_overlay: /var/gentoo/repos/loongson-overlay
 
 livecd/bootargs: dokeymap
 livecd/fstype: squashfs
-livecd/iso: install-loong-minimal-20211001.iso
+livecd/iso: install-loong-minimal-20211005.iso
 livecd/type: gentoo-release-minimal
-livecd/volid: Gentoo loong 20211001
+livecd/volid: Gentoo loong 20211005
 
 boot/kernel: gentoo
 
@@ -20,7 +20,8 @@ boot/kernel/gentoo/sources: loongarch-git-sources
 boot/kernel/gentoo/config: /opt/releng/releases/kconfig/loong/loong-5.15.config
 boot/kernel/gentoo/console: ttyS0,115200
 # workaround faulty ACPI tables from old-world firmware
-boot/kernel/gentoo/initramfs_overlay: /opt/releng/releases/specs/loong/initramfs_overlay
+# this is baked in catalyst now
+#boot/kernel/gentoo/initramfs_overlay: /opt/releng/releases/specs/loong/initramfs_overlay
 
 livecd/unmerge:
 	app-admin/eselect
