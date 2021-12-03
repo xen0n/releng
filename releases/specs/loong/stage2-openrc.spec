@@ -5,6 +5,6 @@ rel_type: default
 profile: loongson:desktop/3a5000
 snapshot: 20211204
 source_subpath: default/stage1-loong-openrc-20211204
-compression_mode: pixz
+compression_mode: pixz_x
 portage_overlay: /var/gentoo/repos/loongson-overlay
 portage_confdir: /opt/la-releng/portage/stages
