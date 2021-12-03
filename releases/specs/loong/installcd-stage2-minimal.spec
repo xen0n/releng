@@ -1,18 +1,18 @@
 subarch: loong
-version_stamp: 20211007
+version_stamp: 20211125
 target: livecd-stage2
 rel_type: default
 profile: loongson:desktop/3a5000
-snapshot: 20211007
-source_subpath: default/livecd-stage1-loong-20211007
+snapshot: 20211125
+source_subpath: default/livecd-stage1-loong-20211125
 portage_confdir: /opt/releng/releases/portage/isos
 portage_overlay: /var/gentoo/repos/loongson-overlay
 
 livecd/bootargs: dokeymap
 livecd/fstype: squashfs
-livecd/iso: install-loong-minimal-20211007.iso
+livecd/iso: install-loong-minimal-20211125.iso
 livecd/type: gentoo-release-minimal
-livecd/volid: Gentoo loong 20211007
+livecd/volid: Gentoo loong 20211125
 
 boot/kernel: gentoo
 
