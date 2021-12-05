@@ -17,7 +17,7 @@ livecd/volid: Gentoo loong 20211205
 boot/kernel: gentoo
 
 boot/kernel/gentoo/sources: loongarch-git-sources
-boot/kernel/gentoo/config: /opt/releng/releases/kconfig/loong/loong-5.15.config
+boot/kernel/gentoo/config: /opt/releng/releases/kconfig/loong/loong-5.16.config
 boot/kernel/gentoo/console: ttyS0,115200
 # workaround faulty ACPI tables from old-world firmware
 # this is baked in catalyst now
