@@ -2,7 +2,7 @@ subarch: loong
 target: stage4
 version_stamp: systemd-ft-pass1-20211001
 rel_type: default
-profile: loongson:desktop/3a5000/systemd
+profile: loongson:default/linux/loong/21.0/la64v100/lp64d/desktop/systemd
 snapshot: 20211001
 compression_mode: pixz_x
 source_subpath: default/stage3-loong-systemd-20211001

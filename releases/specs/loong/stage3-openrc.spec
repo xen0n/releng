@@ -2,7 +2,7 @@ subarch: loong
 version_stamp: openrc-20211205
 target: stage3
 rel_type: default
-profile: loongson:desktop/3a5000
+profile: loongson:default/linux/loong/21.0/la64v100/lp64d/desktop
 snapshot: 20211205
 source_subpath: default/stage2-loong-openrc-20211205
 compression_mode: pixz_x

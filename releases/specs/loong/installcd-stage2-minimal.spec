@@ -2,7 +2,7 @@ subarch: loong
 version_stamp: 20211205
 target: livecd-stage2
 rel_type: default
-profile: loongson:desktop/3a5000
+profile: loongson:default/linux/loong/21.0/la64v100/lp64d/desktop
 snapshot: 20211205
 source_subpath: default/livecd-stage1-loong-20211205
 portage_confdir: /opt/releng/releases/portage/isos
