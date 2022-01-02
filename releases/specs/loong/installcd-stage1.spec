@@ -1,10 +1,10 @@
 subarch: loong
-version_stamp: 20211224
+version_stamp: 20220102
 target: livecd-stage1
 rel_type: default
 profile: loongson:default/linux/loong/21.0/la64v100/lp64d/desktop
-snapshot: 20211224  # hand-generated
-source_subpath: default/stage3-loong-openrc-20211224
+snapshot: 20220102  # hand-generated
+source_subpath: default/stage3-loong-openrc-20220102
 compression_mode: pixz_x
 portage_confdir: /opt/releng/releases/portage/isos
 portage_overlay: /var/gentoo/repos/loongson-overlay
