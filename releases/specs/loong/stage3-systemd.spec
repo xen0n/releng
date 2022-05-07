@@ -1,10 +1,10 @@
 subarch: loong
-version_stamp: systemd-20220430
+version_stamp: systemd-20220507
 target: stage3
 rel_type: default
 profile: default/linux/loong/22.0/la64v100/lp64d/systemd
-snapshot: 20220430
-source_subpath: default/stage1-loong-systemd-20220430
+snapshot: 20220507
+source_subpath: default/stage1-loong-systemd-20220507
 compression_mode: pixz_x
 #portage_overlay: /var/gentoo/repos/loongson-overlay
 portage_confdir: /opt/la-releng/portage/stages
