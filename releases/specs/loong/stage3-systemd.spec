@@ -7,4 +7,4 @@ snapshot: 20220604
 source_subpath: default/stage1-loong-systemd-20220604
 compression_mode: pixz_x
 #portage_overlay: /var/gentoo/repos/loongson-overlay
-portage_confdir: /opt/la-releng/portage/stages
+portage_confdir: /opt/releng/releases/portage/stages

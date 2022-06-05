@@ -7,7 +7,7 @@ snapshot: 20211001
 compression_mode: pixz_x
 source_subpath: default/stage3-loong-systemd-20211001
 portage_overlay: /var/gentoo/repos/loongson-overlay
-portage_confdir: /opt/la-releng/portage/stages
+portage_confdir: /opt/releng/releases/portage/stages
 
 stage4/use:
 	bindist
