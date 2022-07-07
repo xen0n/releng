@@ -1,10 +1,10 @@
 subarch: loong
-version_stamp: openrc-20220626
+version_stamp: openrc-20220707
 target: stage3
 rel_type: default
 profile: default/linux/loong/22.0/la64v100/lp64d
-snapshot: 20220626
-source_subpath: default/stage1-loong-openrc-20220626
+snapshot: 20220707
+source_subpath: default/stage1-loong-openrc-20220707
 compression_mode: pixz_x
 #portage_overlay: /var/gentoo/repos/loongson-overlay
 portage_confdir: /opt/releng/releases/portage/stages

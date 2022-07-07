@@ -1,12 +1,12 @@
 subarch: loong
-version_stamp: openrc-20220626
+version_stamp: openrc-20220707
 target: stage1
 rel_type: default
 profile: default/linux/loong/22.0/la64v100/lp64d
 
-snapshot: 20220626  # hand-generated
+snapshot: 20220707  # hand-generated
 
-source_subpath: default/stage3-loong-openrc-20220604
+source_subpath: default/stage3-loong-openrc-20220626
 #update_seed: yes
 #update_seed_command: --update --deep --newuse @world
 compression_mode: pixz_x
