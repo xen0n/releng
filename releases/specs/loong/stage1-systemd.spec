@@ -1,12 +1,12 @@
 subarch: loong
-version_stamp: systemd-20220707
+version_stamp: systemd-20220807
 target: stage1
 rel_type: default
 profile: default/linux/loong/22.0/la64v100/lp64d/systemd
 
-snapshot: 20220707  # hand-generated
+snapshot: 20220807  # hand-generated
 
-source_subpath: default/stage3-loong-systemd-20220626
+source_subpath: default/stage3-loong-systemd-20220707
 update_seed: yes
 update_seed_command: -uDU @world
 compression_mode: pixz_x
