@@ -11,6 +11,19 @@ post_src_unpack() {
 			ewarn "no genkernel patch found, skipping hook"
 		fi
 	fi
+
+	if use loong; then
+		einfo "hooked by ${BASH_SOURCE[0]} in ${FUNCNAME[0]}"
+		local patchfile
+		patchfile="${PORTAGE_CONFIGROOT%/}/etc/portage/patches/genkernel-loong.patch"
+		if [[ -f ${patchfile} ]]; then
+			einfo "found genkernel patch for loong support"
+			cd "${S}" || die
+			eapply "${patchfile}"
+		else
+			ewarn "no genkernel patch found, skipping hook"
+		fi
+	fi
 }
 
 post_pkg_postinst() {
@@ -21,9 +34,10 @@ post_pkg_postinst() {
 	local envfile patchfile
 	envfile="${PORTAGE_CONFIGROOT%/}/etc/portage/env/sys-kernel/genkernel"
 	patchfile="${PORTAGE_CONFIGROOT%/}/etc/portage/patches/genkernel-ppc64-iso.patch"
+	patchfile2="${PORTAGE_CONFIGROOT%/}/etc/portage/patches/genkernel-loong.patch"
 	
 	local _x
-	for _x in "${envfile}" "${patchfile}"; do
+	for _x in "${envfile}" "${patchfile}" "${patchfile2}"; do
 		if [[ -f ${_x} ]]; then
 			rm -vf "${_x}"
 		fi
