@@ -10,4 +10,4 @@ update_seed: yes
 update_seed_command: -uDN @world
 portage_confdir: @REPO_DIR@/releases/portage/stages-qemu
 portage_prefix: releng
-interpreter: /usr/bin/qemu-loongarch64
+#interpreter: /usr/bin/qemu-loongarch64

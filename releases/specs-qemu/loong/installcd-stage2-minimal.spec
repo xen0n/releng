@@ -6,7 +6,7 @@ profile: default/linux/loong/23.0/la64v100/lp64d
 snapshot_treeish: @TREEISH@
 source_subpath: 23.0-default/livecd-stage1-loong-@TIMESTAMP@
 portage_confdir: @REPO_DIR@/releases/portage/isos-qemu
-interpreter: /usr/bin/qemu-loongarch64
+#interpreter: /usr/bin/qemu-loongarch64
 
 livecd/bootargs: dokeymap
 livecd/fstype: squashfs

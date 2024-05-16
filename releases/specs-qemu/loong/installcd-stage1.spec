@@ -7,7 +7,7 @@ snapshot_treeish: @TREEISH@
 source_subpath: 23.0-default/stage3-loong-openrc-@TIMESTAMP@
 compression_mode: pixz
 portage_confdir: @REPO_DIR@/releases/portage/isos-qemu
-interpreter: /usr/bin/qemu-loongarch64
+#interpreter: /usr/bin/qemu-loongarch64
 
 livecd/use:
 	alsa
