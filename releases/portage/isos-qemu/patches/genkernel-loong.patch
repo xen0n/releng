@@ -3149,6 +3149,36 @@ index d29ad48..1a92a48 100755
  			mips|mips64*)
  				ARCH="mips"
  				;;
+diff --git a/gen_initramfs.sh b/gen_initramfs.sh
+index 87e5149..588b032 100755
+--- a/gen_initramfs.sh
++++ b/gen_initramfs.sh
+@@ -1785,7 +1785,7 @@ append_firmware() {
+ 
+ 			if [ ${#myfw_f[@]} -gt 1 ]
+ 			then
+-				gen_die "excessive number of firmwares!"
++				gen_die "excessive number of firmwares! - ${myfw} - ${myfw_f[@]}"
+ 			fi
+ 
+ 			if [ ${#myfw_f[@]} -lt 1 ]
+diff --git a/defaults/linuxrc b/defaults/linuxrc
+index 34b2d87..6cfdab9 100644
+--- a/defaults/linuxrc
++++ b/defaults/linuxrc
+@@ -1141,8 +1141,11 @@ then
+ 				# Upgrade to cached version if possible
+ 				[ "${DO_cache}" -a -f "${_CACHED_SQUASHFS_PATH}" ] \
+ 					&& _squashfs_path=${_CACHED_SQUASHFS_PATH}
+-				mount -t squashfs -o loop,ro "${_squashfs_path}" "${NEW_ROOT}/mnt/livecd" || {
++				run mount -t squashfs -o loop,ro "${_squashfs_path}" "${NEW_ROOT}/mnt/livecd" || {
+ 					bad_msg "Squashfs filesystem could not be mounted, dropping into shell."
++					bad_msg "_squashfs_path = ${_squashfs_path}"
++					bad_msg "_CACHED_SQUASHFS_PATH = ${_CACHED_SQUASHFS_PATH}"
++					bad_msg "NEW_ROOT = ${NEW_ROOT}"
+ 					if [ -e /proc/filesystems ]
+ 					then
+ 						grep -Fq squashfs /proc/filesystems || \
 -- 
 2.45.0
 
