@@ -18,7 +18,7 @@ livecd/volid: Gentoo loong @TIMESTAMP@
 boot/kernel: gentoo
 
 boot/kernel/gentoo/sources: sys-kernel/gentoo-sources
-boot/kernel/gentoo/config: @REPO_DIR@/releases/kconfig/loong/loong-6.9.config
+boot/kernel/gentoo/config: @REPO_DIR@/releases/kconfig/loong/loong-6.9-small.config
 # not available for Linux 6.9.x yet
 # boot/kernel/gentoo/packages: --usepkg n zfs zfs-kmod
 
