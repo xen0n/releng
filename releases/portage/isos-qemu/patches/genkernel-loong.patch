@@ -1,16 +1,18 @@
-From 5328f656f094b14ab4c7f54404aa16a23b5724ca Mon Sep 17 00:00:00 2001
+From be595ccf460000c0cce2a3b3b2a518601b185582 Mon Sep 17 00:00:00 2001
 From: WANG Xuerui <xen0n@gentoo.org>
 Date: Sat, 30 Sep 2023 17:55:30 +0800
-Subject: [PATCH] Add support for loong
+Subject: [PATCH] Add support for loong [debug]
 
 Signed-off-by: WANG Xuerui <git@xen0n.name>
 ---
  arch/loongarch/arch-config  | 3065 +++++++++++++++++++++++++++++++++++
  arch/loongarch/config.sh    |    8 +
  arch/loongarch/modules_load |    5 +
+ defaults/linuxrc            |    5 +-
  gen_arch.sh                 |    3 +
  gen_determineargs.sh        |    6 +
- 5 files changed, 3087 insertions(+)
+ gen_initramfs.sh            |   12 +-
+ 7 files changed, 3093 insertions(+), 11 deletions(-)
  create mode 100644 arch/loongarch/arch-config
  create mode 100644 arch/loongarch/config.sh
  create mode 100644 arch/loongarch/modules_load
@@ -2862,7 +2864,7 @@ index 0000000..fbf0092
 +CONFIG_UBIFS_FS=m
 +CONFIG_UBIFS_FS_AUTHENTICATION=y
 +CONFIG_CRAMFS=m
-+CONFIG_SQUASHFS=y
++CONFIG_SQUASHFS=m
 +CONFIG_SQUASHFS_FILE_DIRECT=y
 +CONFIG_SQUASHFS_CHOICE_DECOMP_BY_MOUNT=y
 +CONFIG_SQUASHFS_XATTR=y
@@ -3111,6 +3113,23 @@ index 0000000..af58c85
 +
 +# Crypto
 +MODULES_CRYPTO+=" crc32-loongarch"
+diff --git a/defaults/linuxrc b/defaults/linuxrc
+index 34b2d87..6cfdab9 100644
+--- a/defaults/linuxrc
++++ b/defaults/linuxrc
+@@ -1141,8 +1141,11 @@ then
+ 				# Upgrade to cached version if possible
+ 				[ "${DO_cache}" -a -f "${_CACHED_SQUASHFS_PATH}" ] \
+ 					&& _squashfs_path=${_CACHED_SQUASHFS_PATH}
+-				mount -t squashfs -o loop,ro "${_squashfs_path}" "${NEW_ROOT}/mnt/livecd" || {
++				run mount -t squashfs -o loop,ro "${_squashfs_path}" "${NEW_ROOT}/mnt/livecd" || {
+ 					bad_msg "Squashfs filesystem could not be mounted, dropping into shell."
++					bad_msg "_squashfs_path = ${_squashfs_path}"
++					bad_msg "_CACHED_SQUASHFS_PATH = ${_CACHED_SQUASHFS_PATH}"
++					bad_msg "NEW_ROOT = ${NEW_ROOT}"
+ 					if [ -e /proc/filesystems ]
+ 					then
+ 						grep -Fq squashfs /proc/filesystems || \
 diff --git a/gen_arch.sh b/gen_arch.sh
 index b232c3c..eb89b62 100755
 --- a/gen_arch.sh
@@ -3150,56 +3169,40 @@ index d29ad48..1a92a48 100755
  				ARCH="mips"
  				;;
 diff --git a/gen_initramfs.sh b/gen_initramfs.sh
-index 87e5149..3c45ba4 100755
+index 87e5149..155f737 100755
 --- a/gen_initramfs.sh
 +++ b/gen_initramfs.sh
-@@ -1773,6 +1773,7 @@ append_firmware() {
+@@ -1773,7 +1773,6 @@ append_firmware() {
  		fwlist=( "${FIRMWARE_FILES[@]}" )
  	else
  		local myfw=
-+		local f
- 		local -a myfw_f=()
+-		local -a myfw_f=()
  		while IFS= read -r -u 3 myfw
  		do
-@@ -1783,18 +1784,15 @@ append_firmware() {
+ 			if [ -z "${myfw}" ]
+@@ -1781,20 +1780,13 @@ append_firmware() {
+ 				gen_die "modinfo error!"
+ 			fi
  
- 			myfw_f=( $(compgen -G "${FIRMWARE_DIR}/${myfw}*") )
- 
+-			myfw_f=( $(compgen -G "${FIRMWARE_DIR}/${myfw}*") )
+-
 -			if [ ${#myfw_f[@]} -gt 1 ]
 -			then
 -				gen_die "excessive number of firmwares!"
 -			fi
 -
- 			if [ ${#myfw_f[@]} -lt 1 ]
+-			if [ ${#myfw_f[@]} -lt 1 ]
++			if [ ! -f "${FIRMWARE_DIR}/${myfw}" ]
  			then
  				print_warning 3 "$(get_indent 3) - ${myfw} is missing; Ignoring ..."
  				continue
  			fi
  
 -			fwlist+=( "${myfw_f#${FIRMWARE_DIR}/}" )
-+			for f in "${myfw_f[@]}"; do
-+				fwlist+=( "${f#${FIRMWARE_DIR}/}" )
-+			done
++			fwlist+=( "${myfw}" )
  		done 3< <( (
  			modinfo -b "${KERNEL_MODULES_PREFIX%/}" -k "${KV}" -F firmware $(mod_dep_list) 2>/dev/null || echo
  		) | sort | uniq )
-diff --git a/defaults/linuxrc b/defaults/linuxrc
-index 34b2d87..6cfdab9 100644
---- a/defaults/linuxrc
-+++ b/defaults/linuxrc
-@@ -1141,8 +1141,11 @@ then
- 				# Upgrade to cached version if possible
- 				[ "${DO_cache}" -a -f "${_CACHED_SQUASHFS_PATH}" ] \
- 					&& _squashfs_path=${_CACHED_SQUASHFS_PATH}
--				mount -t squashfs -o loop,ro "${_squashfs_path}" "${NEW_ROOT}/mnt/livecd" || {
-+				run mount -t squashfs -o loop,ro "${_squashfs_path}" "${NEW_ROOT}/mnt/livecd" || {
- 					bad_msg "Squashfs filesystem could not be mounted, dropping into shell."
-+					bad_msg "_squashfs_path = ${_squashfs_path}"
-+					bad_msg "_CACHED_SQUASHFS_PATH = ${_CACHED_SQUASHFS_PATH}"
-+					bad_msg "NEW_ROOT = ${NEW_ROOT}"
- 					if [ -e /proc/filesystems ]
- 					then
- 						grep -Fq squashfs /proc/filesystems || \
 -- 
-2.45.0
+2.45.1
 
