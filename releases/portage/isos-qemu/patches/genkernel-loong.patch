@@ -3150,18 +3150,39 @@ index d29ad48..1a92a48 100755
  				ARCH="mips"
  				;;
 diff --git a/gen_initramfs.sh b/gen_initramfs.sh
-index 87e5149..588b032 100755
+index 87e5149..3c45ba4 100755
 --- a/gen_initramfs.sh
 +++ b/gen_initramfs.sh
-@@ -1785,7 +1785,7 @@ append_firmware() {
+@@ -1773,6 +1773,7 @@ append_firmware() {
+ 		fwlist=( "${FIRMWARE_FILES[@]}" )
+ 	else
+ 		local myfw=
++		local f
+ 		local -a myfw_f=()
+ 		while IFS= read -r -u 3 myfw
+ 		do
+@@ -1783,18 +1784,15 @@ append_firmware() {
  
- 			if [ ${#myfw_f[@]} -gt 1 ]
- 			then
+ 			myfw_f=( $(compgen -G "${FIRMWARE_DIR}/${myfw}*") )
+ 
+-			if [ ${#myfw_f[@]} -gt 1 ]
+-			then
 -				gen_die "excessive number of firmwares!"
-+				gen_die "excessive number of firmwares! - ${myfw} - ${myfw_f[@]}"
+-			fi
+-
+ 			if [ ${#myfw_f[@]} -lt 1 ]
+ 			then
+ 				print_warning 3 "$(get_indent 3) - ${myfw} is missing; Ignoring ..."
+ 				continue
  			fi
  
- 			if [ ${#myfw_f[@]} -lt 1 ]
+-			fwlist+=( "${myfw_f#${FIRMWARE_DIR}/}" )
++			for f in "${myfw_f[@]}"; do
++				fwlist+=( "${f#${FIRMWARE_DIR}/}" )
++			done
+ 		done 3< <( (
+ 			modinfo -b "${KERNEL_MODULES_PREFIX%/}" -k "${KV}" -F firmware $(mod_dep_list) 2>/dev/null || echo
+ 		) | sort | uniq )
 diff --git a/defaults/linuxrc b/defaults/linuxrc
 index 34b2d87..6cfdab9 100644
 --- a/defaults/linuxrc
